@@ -483,7 +483,9 @@ const WorkCollectiveWebsite = () => {
               gridTemplateColumns: windowWidth >= 768 ? 'repeat(2, 1fr)' : '1fr', 
               gap: 16, 
               maxWidth: 900, 
-              margin: '0 auto' 
+              margin: '0 auto',
+              width: '100%',
+              padding: '0 16px'
             }}>
               {modules.map((m) => {
                 const row = Math.floor(m.id / 2);
@@ -504,87 +506,81 @@ const WorkCollectiveWebsite = () => {
                       minHeight: '280px',
                       backgroundColor: bg, 
                       border: `2px solid ${fg}`,
-                      perspective: '1000px',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: 'clamp(16px, 3vw, 24px)'
                     }}
                   >
+                    {/* Front - Title */}
                     <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      height: '100%',
-                      transformStyle: 'preserve-3d',
-                      transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0)',
-                      transition: 'transform 0.6s'
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      padding: 'clamp(16px, 3vw, 24px)',
+                      opacity: isHovered ? 0 : 1,
+                      transition: 'opacity 0.4s ease'
                     }}>
-                      <div style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        padding: 'clamp(16px, 3vw, 24px)'
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: 'clamp(12px, 2vw, 16px)', 
+                        left: 'clamp(12px, 2vw, 16px)', 
+                        fontSize: 'clamp(12px, 1.5vw, 14px)', 
+                        fontWeight: 700, 
+                        color: fg 
                       }}>
-                        <div style={{ 
-                          position: 'absolute', 
-                          top: 'clamp(12px, 2vw, 16px)', 
-                          left: 'clamp(12px, 2vw, 16px)', 
-                          fontSize: 'clamp(12px, 1.5vw, 14px)', 
-                          fontWeight: 700, 
-                          color: fg 
-                        }}>
-                          Module
-                        </div>
-                        <div style={{ 
-                          position: 'absolute', 
-                          top: 'clamp(12px, 2vw, 16px)', 
-                          right: 'clamp(12px, 2vw, 16px)', 
-                          fontSize: 'clamp(12px, 1.5vw, 14px)', 
-                          fontWeight: 700, 
-                          color: fg 
-                        }}>
-                          {m.id}
-                        </div>
-                        <div style={{ 
-                          fontSize: 'clamp(20px, 3vw, 28px)', 
-                          fontWeight: 800, 
-                          color: fg, 
-                          textAlign: 'center',
-                          padding: '0 8px',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                          lineHeight: 1.2
-                        }}>
-                          {m.name}
-                        </div>
+                        Module
                       </div>
-                      
-                      <div style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: 'clamp(24px, 4vw, 32px)',
-                        backgroundColor: bg,
-                        border: `2px solid ${fg}`
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: 'clamp(12px, 2vw, 16px)', 
+                        right: 'clamp(12px, 2vw, 16px)', 
+                        fontSize: 'clamp(12px, 1.5vw, 14px)', 
+                        fontWeight: 700, 
+                        color: fg 
                       }}>
-                        <p style={{ 
-                          fontSize: 'clamp(14px, 2vw, 18px)', 
-                          color: fg, 
-                          textAlign: 'center', 
-                          lineHeight: 1.5 
-                        }}>
-                          {m.desc}
-                        </p>
+                        {m.id}
                       </div>
+                      <div style={{ 
+                        fontSize: 'clamp(20px, 3vw, 28px)', 
+                        fontWeight: 800, 
+                        color: fg, 
+                        textAlign: 'center',
+                        padding: '0 8px',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        lineHeight: 1.2
+                      }}>
+                        {m.name}
+                      </div>
+                    </div>
+                    
+                    {/* Back - Description */}
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: 'clamp(24px, 4vw, 32px)',
+                      opacity: isHovered ? 1 : 0,
+                      transition: 'opacity 0.4s ease'
+                    }}>
+                      <p style={{ 
+                        fontSize: 'clamp(14px, 2vw, 18px)', 
+                        color: fg, 
+                        textAlign: 'center', 
+                        lineHeight: 1.5 
+                      }}>
+                        {m.desc}
+                      </p>
                     </div>
                   </div>
                 );
@@ -604,7 +600,8 @@ const WorkCollectiveWebsite = () => {
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: 'clamp(24px, 5vw, 48px)', 
-        position: 'relative' 
+        position: 'relative',
+        width: '100%'
       }}>
         <button 
           onClick={() => setCurrentPage('home')} 
@@ -634,19 +631,22 @@ const WorkCollectiveWebsite = () => {
           </div>
         </button>
         
-        <div style={{ maxWidth: 900, width: '100%', textAlign: 'center', padding: '0 16px' }}>
+        <div style={{ maxWidth: 900, width: '100%', textAlign: 'center', padding: '0 16px', margin: '0 auto' }}>
           <h1 style={{ 
             fontSize: 'clamp(32px, 6vw, 64px)', 
             fontWeight: 'bold', 
             color: currentItem?.textColor || '#ffffff', 
-            marginBottom: 'clamp(16px, 3vw, 32px)' 
+            marginBottom: 'clamp(16px, 3vw, 32px)',
+            textAlign: 'center'
           }}>
             {pageCopy.title}
           </h1>
           <p style={{ 
             fontSize: 'clamp(16px, 2.5vw, 24px)', 
             color: currentItem?.textColor || '#ffffff', 
-            lineHeight: 1.8 
+            lineHeight: 1.8,
+            textAlign: 'center',
+            margin: '0 auto'
           }}>
             {pageCopy.content}
           </p>
@@ -656,8 +656,8 @@ const WorkCollectiveWebsite = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', width: '100%', margin: 0, padding: 0, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1 }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', width: '100vw', maxWidth: '100%', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', position: 'relative', left: 0, right: 0 }}>
+      <div style={{ flex: 1, width: '100%' }}>
         {renderPage()}
       </div>
       
